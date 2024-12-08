@@ -1,31 +1,44 @@
 extends CharacterBody2D;
 class_name Player;
 
-const avaidable_state: Array[String] = [ #Indica los estados posibles para el jugador
-	"in_game","movement","dash_mode",
-	"dead"
-	];
+var states: Dictionary = { #Indica los estados posibles para el jugador
+	"in_game":true,"movement":true,"dash_mode":false,
+	"dead":false
+	};
 	
-var avaidable_state_node: Array[Node]; #Contiene los nodos que trata con los diversos estados del jugador (Se añaden en la funcion ready)
-var index_state = 0; #El indice de los estados en el que se encuentra
+var all_state_node: Dictionary = states.duplicate(); #Contiene los nodos que trata con los diversos estados del jugador (Se añaden en la funcion ready)
+
+var avaidable_states_node : Array[Node];
 
 func _ready() -> void:
-	avaidable_state_node.resize(avaidable_state.size()); #Se le pone el tamaño (COMO SI FUERA JAVA NMMS)
 	var i = 0;
-	while i <= avaidable_state.size() - 1: #Se añaden los nodos de estados al array :D
-		avaidable_state_node[i] = get_state_node(avaidable_state[i]);
-		print(avaidable_state_node);
+	for name_state in states: #Se añaden los nodos de estados al array :D
+		all_state_node[name_state] = get_state_node(name_state);
 		i += 1;
+	avaidable_states_node =  set_avaidable_states();
+
 
 
 func _physics_process(delta: float) -> void:
 	var Delta = delta*58.86; ## un delta que no afecta el movimiento si es que olvidas ponerlo
 	
-	avaidable_state_node[index_state].local_physics_process(Delta);
+	for state in avaidable_states_node:
+		state.local_physics_process(Delta);
 	
 	move_and_slide();
 	
-func get_state_node(node_name):
-	var stateNodeGroup = get_tree().get_nodes_in_group(node_name);
-	var stateNode = stateNodeGroup[0];
+func get_state_node(node_name) -> Node:
+	var stateNode = get_tree().get_first_node_in_group(node_name);
 	return stateNode;
+
+func set_avaidable_states() -> Array[Node]: ## Funcion que retorna los nodos de los estados que se encuentran en true en un array :D
+	var output_array : Array[Node];
+	var i = 0;
+	for node_name in all_state_node:
+		if states[node_name]:
+			output_array.resize(output_array.size()+1); #Ampliar el espacio del array en 1
+			output_array[i] = all_state_node[node_name]; # si se encuentra en true, añadirlo al output
+			print(output_array);
+		i += 1;
+	return output_array;
+	
