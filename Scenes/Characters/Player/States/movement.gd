@@ -3,8 +3,8 @@ extends Node;
 var direction_x : float;
 var direction_y : float;
 
-const meter = 8.0;
-var speed = 15;
+const meter : int  = GlobalVariables.meter;
+var speed : int = 15;
 
 @onready var player: Player = $"../..";
 
@@ -20,7 +20,6 @@ func local_physics_process(delta: float) -> void:
 	pass;
 
 func general_movement(delta: float) -> void:
-	print("true")
 	
 	player.velocity.x = lerp(player.velocity.x,meter*speed*direction_x,0.05);
 	player.velocity.y = lerp(player.velocity.y,-meter*speed*direction_y,0.05);
