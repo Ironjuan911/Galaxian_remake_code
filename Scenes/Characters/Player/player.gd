@@ -17,8 +17,6 @@ func _ready() -> void:
 		i += 1;
 	avaidable_states_node =  set_avaidable_states();
 
-
-
 func _physics_process(delta: float) -> void:
 	var Delta = delta*58.86; ## un delta que no afecta el movimiento si es que olvidas ponerlo
 	
@@ -40,5 +38,6 @@ func set_avaidable_states() -> Array[Node]: ## Funcion que retorna los nodos de 
 			output_array[i] = all_state_node[node_name]; # si se encuentra en true, añadirlo al output
 			print(output_array);
 		i += 1;
+	
 	return output_array;
 	

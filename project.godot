@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalVariables="*res://Scenes/Game/Global_variables.tscn"
 
+[global_group]
+
+Center_Viewport=""
+
 [input]
 
 ui_left={
