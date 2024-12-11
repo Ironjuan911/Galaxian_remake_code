@@ -28,3 +28,6 @@ script = ExtResource("5_jqcqq")
 
 [node name="dead" type="Node" parent="States" groups=["dead"]]
 script = ExtResource("6_8kvke")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2, 6, -4, 4, -4, 4, -6, 1, -9, -1, -9, -4, -6, -4, -4, -6, -4, -7, -2, -7, 7)

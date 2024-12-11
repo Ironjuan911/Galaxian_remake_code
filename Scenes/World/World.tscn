@@ -1,15 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3kwx4vcawv1v"]
+[gd_scene load_steps=8 format=3 uid="uid://d3kwx4vcawv1v"]
 
 [ext_resource type="PackedScene" uid="uid://rgmyvohdjscp" path="res://Scenes/Characters/Player/player.tscn" id="1_pg3h5"]
 [ext_resource type="Script" path="res://Scenes/World/camera.gd" id="2_fs553"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4llfu"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sac1x"]
+a = Vector2(-120, -168)
+b = Vector2(120, -168)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_e6sti"]
+a = Vector2(120, 168)
+b = Vector2(-120, 168)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_oh7r5"]
+a = Vector2(-120, -168)
+b = Vector2(-120, 168)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0mnyr"]
+a = Vector2(120, 160)
+b = Vector2(120, -168)
+
 [node name="World" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
-scale = Vector2(400, 600)
+scale = Vector2(231, 325)
 texture = SubResource("CanvasTexture_4llfu")
 
 [node name="Player" parent="." instance=ExtResource("1_pg3h5")]
@@ -18,3 +34,27 @@ position = Vector2(0, 2)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 script = ExtResource("2_fs553")
+
+[node name="Game_limits" type="StaticBody2D" parent="."]
+
+[node name="Limit_Up" type="CollisionShape2D" parent="Game_limits"]
+shape = SubResource("SegmentShape2D_sac1x")
+
+[node name="Limit_Down" type="CollisionShape2D" parent="Game_limits"]
+shape = SubResource("SegmentShape2D_e6sti")
+
+[node name="Limit_Left" type="CollisionShape2D" parent="Game_limits"]
+shape = SubResource("SegmentShape2D_oh7r5")
+
+[node name="Limit_Right" type="CollisionShape2D" parent="Game_limits"]
+shape = SubResource("SegmentShape2D_0mnyr")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -200)
+amount = 17
+lifetime = 0.9
+preprocess = 3.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(115, 1)
+anim_speed_max = 15.67
