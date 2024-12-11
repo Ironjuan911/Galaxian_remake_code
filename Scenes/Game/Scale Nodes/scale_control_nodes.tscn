@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3s5uwdkbvbst"]
+
+[ext_resource type="Script" path="res://Scenes/Game/Scale Nodes/scale_control_nodes.gd" id="1_bnott"]
+
+[node name="Scale control nodes" type="Node"]
+script = ExtResource("1_bnott")

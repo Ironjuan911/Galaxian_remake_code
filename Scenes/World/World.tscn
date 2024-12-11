@@ -18,7 +18,7 @@ a = Vector2(-120, -168)
 b = Vector2(-120, 168)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0mnyr"]
-a = Vector2(120, 160)
+a = Vector2(120, 168)
 b = Vector2(120, -168)
 
 [node name="World" type="Node2D"]

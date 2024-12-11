@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp5onu6sa07gw"]
+[gd_scene load_steps=5 format=3 uid="uid://bp5onu6sa07gw"]
 
 [ext_resource type="PackedScene" uid="uid://d3kwx4vcawv1v" path="res://Scenes/World/World.tscn" id="1_g0x3b"]
 [ext_resource type="Theme" uid="uid://c4q0in3tia27l" path="res://Resources/theme_2.tres" id="1_i6qs1"]
 [ext_resource type="Theme" uid="uid://3gtk5tv6bmte" path="res://Resources/theme_1.tres" id="2_5bj8b"]
+[ext_resource type="PackedScene" uid="uid://cqnoxobbih28g" path="res://Scenes/Game/Android_Buttons/New_touch_controls.tscn" id="4_o8qo7"]
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -69,3 +70,6 @@ offset_bottom = 0.252991
 grow_vertical = 2
 theme = ExtResource("2_5bj8b")
 text = "Hola"
+
+[node name="NewTouchControls" parent="." instance=ExtResource("4_o8qo7")]
+layout_mode = 1
