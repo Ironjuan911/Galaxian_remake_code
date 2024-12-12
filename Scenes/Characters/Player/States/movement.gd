@@ -16,7 +16,7 @@ func local_physics_process(delta: float) -> void:
 		general_movement(delta);
 	else:
 		idle_movement(delta);
-	print("x: " + str(direction_x) + ", y: " + str(direction_y));
+	#print("x: " + str(direction_x) + ", y: " + str(direction_y));
 	pass;
 
 func general_movement(delta: float) -> void:

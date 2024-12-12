@@ -16,6 +16,7 @@ func _ready() -> void:
 	pass;
 
 func local_physics_process(delta: float) -> void:
+	check_dash_mode();
 	direction = Vector2(
 		Input.get_axis("ui_left","ui_right"),
 		Input.get_axis("ui_down","ui_up")
@@ -34,4 +35,6 @@ func _SetGravityParticles(local_direction : Vector2) -> void:
 	for node_particle in all_particles:
 		node_particle.gravity = node_particle.get_meta("real_gravity") + local_direction*delta_gravity;
 	
-	
+func check_dash_mode() -> void:
+	if Input.is_action_just_pressed("ui_dash"):
+		player.admin_states.dash_mode();

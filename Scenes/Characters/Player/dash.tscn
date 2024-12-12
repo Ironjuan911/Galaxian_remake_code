@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlicvbqfejndy"]
+
+[ext_resource type="Texture2D" uid="uid://d3gvpk6660tw5" path="res://Sprites/Player/Dash.png" id="1_x32ri"]
+
+[sub_resource type="GDScript" id="GDScript_3x3wq"]
+script/source = "extends Node2D;
+class_name Dash_Animation_Player;
+
+@onready var animation: AnimationPlayer = $AnimationPlayer
+
+func delete() -> void:
+	queue_free();
+"
+
+[sub_resource type="Animation" id="Animation_q43sw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dash_texture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lvqr8"]
+resource_name = "disappear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dash_texture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"delete"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cfwdb"]
+_data = {
+"RESET": SubResource("Animation_q43sw"),
+"disappear": SubResource("Animation_lvqr8")
+}
+
+[node name="Dash" type="Node2D"]
+script = SubResource("GDScript_3x3wq")
+
+[node name="dash_texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_x32ri")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cfwdb")
+}
