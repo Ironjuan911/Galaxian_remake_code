@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rgmyvohdjscp"]
+[gd_scene load_steps=8 format=3 uid="uid://rgmyvohdjscp"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
@@ -7,27 +7,82 @@
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dash_mode.gd" id="5_jqcqq"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dead.gd" id="6_8kvke"]
 
+[sub_resource type="Curve" id="Curve_wfwke"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.480556, 131.774), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3vesu")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-0.5, 0)
-texture = ExtResource("2_hjygi")
-hframes = 5
+[node name="States" type="Node2D" parent="."]
 
-[node name="States" type="Node" parent="."]
+[node name="in_game" type="Node2D" parent="States" groups=["in_game"]]
+script = ExtResource("4_r8evb")
+
+[node name="ParticlesLeft" type="CPUParticles2D" parent="States/in_game"]
+position = Vector2(-2, 6)
+amount = 3
+lifetime = 0.1
+speed_scale = 0.5
+lifetime_randomness = 0.37
+local_coords = true
+gravity = Vector2(0, 1150)
+angular_velocity_min = -720.0
+angular_velocity_max = -514.29
+angular_velocity_curve = SubResource("Curve_wfwke")
+orbit_velocity_min = 2.0
+orbit_velocity_max = 2.0
+scale_amount_min = 0.8
+scale_amount_max = 1.3
+color = Color(0.905717, 0.514887, 0.278889, 1)
+
+[node name="ParticlesCenter" type="CPUParticles2D" parent="States/in_game"]
+position = Vector2(0, 6)
+amount = 3
+lifetime = 0.1
+speed_scale = 0.5
+lifetime_randomness = 0.37
+local_coords = true
+gravity = Vector2(0, 1150)
+angular_velocity_min = -720.0
+angular_velocity_max = -514.29
+angular_velocity_curve = SubResource("Curve_wfwke")
+scale_amount_min = 0.8
+scale_amount_max = 1.3
+color = Color(0.905717, 0.514887, 0.278889, 1)
+
+[node name="ParticlesRight" type="CPUParticles2D" parent="States/in_game"]
+position = Vector2(2, 6)
+amount = 3
+lifetime = 0.1
+speed_scale = 0.5
+lifetime_randomness = 0.37
+local_coords = true
+gravity = Vector2(0, 1150)
+angular_velocity_min = -720.0
+angular_velocity_max = -514.29
+angular_velocity_curve = SubResource("Curve_wfwke")
+orbit_velocity_min = -2.0
+orbit_velocity_max = -2.0
+scale_amount_min = 0.8
+scale_amount_max = 1.3
+color = Color(0.905717, 0.514887, 0.278889, 1)
 
 [node name="movement" type="Node" parent="States" groups=["movement"]]
 script = ExtResource("3_lj4le")
-
-[node name="in_game" type="Node" parent="States" groups=["in_game"]]
-script = ExtResource("4_r8evb")
 
 [node name="dash_mode" type="Node" parent="States" groups=["dash_mode"]]
 script = ExtResource("5_jqcqq")
 
 [node name="dead" type="Node" parent="States" groups=["dead"]]
 script = ExtResource("6_8kvke")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 0)
+texture = ExtResource("2_hjygi")
+hframes = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2, 6, -4, 4, -4, 4, -6, 1, -9, -1, -9, -4, -6, -4, -4, -6, -4, -7, -2, -7, 7)

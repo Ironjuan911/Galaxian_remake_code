@@ -1,50 +1,58 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl6ft7cw4gqnu"]
+[gd_scene load_steps=4 format=3 uid="uid://cqnoxobbih28g"]
 
-[ext_resource type="PackedScene" uid="uid://bjgvbdws70i6p" path="res://Scenes/Game/Android_Buttons/Joystick/mask_virtual_joystick.tscn" id="1_17qjl"]
-[ext_resource type="PackedScene" uid="uid://dtg43u0k6scfk" path="res://Scenes/Game/Android_Buttons/Button/button.tscn" id="2_rrelo"]
+[ext_resource type="PackedScene" uid="uid://c62cl676dfdum" path="res://Scenes/Game/Android_Buttons/Joystick/virtual_joystick_scene.tscn" id="1_k72xd"]
+[ext_resource type="PackedScene" uid="uid://dtg43u0k6scfk" path="res://Scenes/Game/Android_Buttons/Button/button.tscn" id="2_y61nm"]
+[ext_resource type="PackedScene" uid="uid://3s5uwdkbvbst" path="res://Scenes/Game/Scale Nodes/scale_control_nodes.tscn" id="3_uvqdq"]
 
-[node name="TouchControls" type="CanvasLayer"]
-
-[node name="TimerControls" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="Mask Virtual Joystick" parent="." instance=ExtResource("1_17qjl")]
-anchor_left = 0.0
-anchor_top = 0.741
-anchor_right = 0.5
+[node name="TouchControls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 175.0
-offset_top = -0.167999
-offset_right = -402.0
-offset_bottom = -168.0
 grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Button dash" parent="." groups=["Scaleable_node"] instance=ExtResource("2_rrelo")]
+[node name="Virtual Joystick" parent="." groups=["Scaleable_node"] instance=ExtResource("1_k72xd")]
+layout_mode = 1
+anchor_left = 0.03
+anchor_right = 0.03
+anchor_bottom = 0.54
+offset_left = 0.439999
+offset_top = 2.02399
+offset_right = 300.44
+offset_bottom = 300.08
+scale = Vector2(0.8, 0.8)
+
+[node name="Button dash" parent="." groups=["Scaleable_node"] instance=ExtResource("2_y61nm")]
 layout_direction = 1
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.897
-anchor_top = 0.6
-anchor_right = 0.897
-anchor_bottom = 0.6
-offset_left = -0.343994
-offset_top = 0.199982
-offset_right = -0.343994
-offset_bottom = 0.199982
+anchor_left = 0.905
+anchor_top = 0.549
+anchor_right = 0.905
+anchor_bottom = 0.549
+offset_left = -0.560059
+offset_top = 0.247986
+offset_right = -0.560059
+offset_bottom = 0.247986
 grow_horizontal = 2
 grow_vertical = 2
 Input_received = "ui_dash"
 
-[node name="Button jump" parent="." groups=["Scaleable_node"] instance=ExtResource("2_rrelo")]
+[node name="Button jump" parent="." groups=["Scaleable_node"] instance=ExtResource("2_y61nm")]
 layout_direction = 1
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.753
-anchor_top = 0.801
-anchor_right = 0.753
-anchor_bottom = 0.801
+anchor_left = 0.791667
+anchor_top = 0.770136
+anchor_right = 0.792063
+anchor_bottom = 0.771679
 offset_top = -0.0479736
 offset_right = -0.456055
 offset_bottom = -1.04797
 grow_horizontal = 0
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="Scale control nodes" parent="." instance=ExtResource("3_uvqdq")]
+scale_y = false
