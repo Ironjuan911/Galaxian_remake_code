@@ -1,16 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqwys1y2grnq4"]
 
-[ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_qjcih"]
-[ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_wiltb"]
-[ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_02r4l"]
-[ext_resource type="Script" path="res://Scenes/Characters/Code/ai_enemy.gd" id="4_fi747"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_fvt50"]
+[ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_3fs6e"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_dih1c"]
+[ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_1/ai_enemy_1.gd" id="4_wv25n"]
 
 [node name="Enemy1" type="CharacterBody2D"]
-script = ExtResource("1_qjcih")
+position = Vector2(0, 125)
+script = ExtResource("1_fvt50")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-0.5, 0)
-texture = ExtResource("2_wiltb")
+texture = ExtResource("2_3fs6e")
 hframes = 13
 
 [node name="States" type="Node2D" parent="."]
@@ -18,12 +19,12 @@ hframes = 13
 [node name="in_game" type="Node2D" parent="States" groups=["in_game"]]
 
 [node name="movement" type="Node2D" parent="States" groups=["movement"]]
-script = ExtResource("3_02r4l")
+script = ExtResource("3_dih1c")
 
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 
 [node name="AI_Enemy" type="Node" parent="."]
-script = ExtResource("4_fi747")
+script = ExtResource("4_wv25n")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -26)
