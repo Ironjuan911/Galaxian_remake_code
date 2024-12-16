@@ -21,8 +21,8 @@ func local_physics_process(delta: float) -> void:
 
 func general_movement(delta: float) -> void:
 	
-	player.velocity.x = lerp(player.velocity.x,meter*speed*direction_x,0.05);
-	player.velocity.y = lerp(player.velocity.y,-meter*speed*direction_y,0.05);
+	player.velocity.x = lerp(player.velocity.x,meter*speed*delta*direction_x,0.05);
+	player.velocity.y = lerp(player.velocity.y,-meter*speed*delta*direction_y,0.05);
 	
 func idle_movement(delta: float) -> void:
 	player.velocity.x = lerp(player.velocity.x,0.0,0.1);

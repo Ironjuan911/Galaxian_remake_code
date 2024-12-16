@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3kwx4vcawv1v"]
+[gd_scene load_steps=9 format=3 uid="uid://d3kwx4vcawv1v"]
 
 [ext_resource type="PackedScene" uid="uid://rgmyvohdjscp" path="res://Scenes/Characters/Player/player.tscn" id="1_pg3h5"]
 [ext_resource type="Script" path="res://Scenes/World/camera.gd" id="2_fs553"]
+[ext_resource type="PackedScene" uid="uid://bqwys1y2grnq4" path="res://Scenes/Characters/Enemies/Enemy_1.tscn" id="3_h7l52"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4llfu"]
 
@@ -51,10 +52,14 @@ shape = SubResource("SegmentShape2D_0mnyr")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, -200)
-amount = 17
-lifetime = 0.9
+amount = 30
+lifetime = 1.8
 preprocess = 3.0
+speed_scale = 0.6
 randomness = 1.0
 emission_shape = 3
 emission_rect_extents = Vector2(115, 1)
 anim_speed_max = 15.67
+
+[node name="Enemy1" parent="." instance=ExtResource("3_h7l52")]
+position = Vector2(-29, -41)

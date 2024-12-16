@@ -6,7 +6,7 @@ extends Node;
 
 @onready var dash_animation_data : PackedScene = preload("res://Scenes/Characters/Player/dash.tscn");
 
-var dash_speed = 20;
+@export var dash_speed = 30;
 var meter = GlobalVariables.meter;
 
 var enabled : bool = false;
@@ -26,14 +26,14 @@ func activated() -> void:
 	timer_particle.start();
 
 func local_physics_process(delta: float) -> void:
-	dash_movement();
+	dash_movement(delta);
 	
 
-func dash_movement() -> void:
+func dash_movement(delta:float) -> void:
 	if (abs(dash_direction.x) == 1 and abs(dash_direction.y) == 1):
-		player.velocity = dash_speed*meter*dash_direction;
+		player.velocity = dash_speed*meter*dash_direction*delta;
 	else:
-		player.velocity = dash_speed*meter*dash_direction*1.3;
+		player.velocity = dash_speed*meter*dash_direction*1.3*delta;
 
 func _on_timer_state_timeout() -> void:
 	enabled = false;

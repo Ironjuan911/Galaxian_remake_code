@@ -2,7 +2,7 @@ extends Node;
 class_name Player_in_game;
 
 const delta_gravity : int = 900;
-const index_lerp_direction : float = 0.1;
+const index_lerp_direction : float = 0.9;
 
 var direction : Vector2;
 var lerp_direction : Vector2;
@@ -26,14 +26,14 @@ func local_physics_process(delta: float) -> void:
 		lerp (lerp_direction.x,direction.x,index_lerp_direction),
 		lerp (lerp_direction.y,direction.y,index_lerp_direction)
 	);
-	_SetGravityParticles(lerp_direction);
+	_SetGravityParticles(lerp_direction,delta);
 	pass;
 
-func _SetGravityParticles(local_direction : Vector2) -> void:
+func _SetGravityParticles(local_direction : Vector2,delta:float) -> void:
 	local_direction.x = -local_direction.x/10; 
 	#local_direction.x = 0;
 	for node_particle in all_particles:
-		node_particle.gravity = node_particle.get_meta("real_gravity") + local_direction*delta_gravity;
+		node_particle.gravity = node_particle.get_meta("real_gravity") + local_direction*delta_gravity*delta;
 	
 func check_dash_mode() -> void:
 	if Input.is_action_just_pressed("ui_dash"):

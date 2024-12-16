@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://rgmyvohdjscp"]
 
-[ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/admin_states.gd" id="2_tckwa"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/movement.gd" id="3_lj4le"]
@@ -14,7 +14,7 @@ max_value = 360.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.480556, 131.774), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_3vesu")
 
 [node name="Admin_States" type="Node" parent="."]
@@ -81,11 +81,11 @@ script = ExtResource("3_lj4le")
 script = ExtResource("5_jqcqq")
 
 [node name="Timer_state" type="Timer" parent="States/dash_mode"]
-wait_time = 0.25
+wait_time = 0.167
 one_shot = true
 
 [node name="Timer_particle" type="Timer" parent="States/dash_mode"]
-wait_time = 0.06
+wait_time = 0.025
 
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 script = ExtResource("6_8kvke")

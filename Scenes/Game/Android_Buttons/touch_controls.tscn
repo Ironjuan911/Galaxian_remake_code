@@ -55,4 +55,3 @@ grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Scale control nodes" parent="." instance=ExtResource("3_uvqdq")]
-scale_y = false
