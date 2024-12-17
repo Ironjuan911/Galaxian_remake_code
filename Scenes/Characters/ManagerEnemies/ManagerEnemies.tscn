@@ -1,6 +1,83 @@
-[gd_scene load_steps=2 format=3 uid="uid://602fdqjnolp5"]
+[gd_scene load_steps=3 format=3 uid="uid://602fdqjnolp5"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/ManagerEnemies/manager_enemies.gd" id="1_gljrp"]
+[ext_resource type="Script" path="res://Scenes/Characters/ManagerEnemies/spawn_enemies.gd" id="2_2uyhn"]
 
 [node name="ManagerEnemies" type="Node2D"]
 script = ExtResource("1_gljrp")
+
+[node name="SpawnEnemies" type="Node2D" parent="."]
+position = Vector2(-1, -29)
+script = ExtResource("2_2uyhn")
+
+[node name="Zones" type="Node2D" parent="."]
+
+[node name="Zone1" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-60, 0)
+
+[node name="Zone2" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-45, 0)
+
+[node name="Zone3" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-30, 0)
+
+[node name="Zone4" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-15, 0)
+
+[node name="Zone5" type="Node2D" parent="Zones" groups=["Zones"]]
+
+[node name="Zone6" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(15, 0)
+
+[node name="Zone7" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(30, 0)
+
+[node name="Zone8" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(45, 0)
+
+[node name="Zone9" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(60, 0)
+
+[node name="Zone10" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-60, 15)
+
+[node name="Zone11" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-45, 15)
+
+[node name="Zone12" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-30, 15)
+
+[node name="Zone13" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-15, 15)
+
+[node name="Zone14" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(0, 15)
+
+[node name="Zone15" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(15, 15)
+
+[node name="Zone16" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(30, 15)
+
+[node name="Zone17" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(45, 15)
+
+[node name="Zone18" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(60, 15)
+
+[node name="Zone19" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-23, 30)
+
+[node name="Zone20" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(-8, 30)
+
+[node name="Zone21" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(8, 30)
+
+[node name="Zone22" type="Node2D" parent="Zones" groups=["Zones"]]
+position = Vector2(23, 30)
+
+[node name="TimerReady" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TimerReady" to="." method="_ready_timer"]

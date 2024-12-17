@@ -1,6 +1,8 @@
 extends Character;
 class_name Enemy;
 
+@onready var AI : AI_Enemy = $AI_Enemy;
+
 func extend_ready() -> void:
 	states = { #Indica los estados posibles para el jugador
 	"in_game":false,"movement":true,
