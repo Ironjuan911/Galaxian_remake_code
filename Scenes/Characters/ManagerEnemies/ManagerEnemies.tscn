@@ -78,6 +78,11 @@ position = Vector2(8, 30)
 position = Vector2(23, 30)
 
 [node name="TimerReady" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="TimerGame" type="Timer" parent="."]
 autostart = true
 
 [connection signal="timeout" from="TimerReady" to="." method="_ready_timer"]
+[connection signal="timeout" from="TimerGame" to="." method="_process_timer"]

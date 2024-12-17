@@ -60,7 +60,6 @@ const max_objectives : int = 3;
 var start_mode : bool = false;
 
 func set_objectives() -> void:
-	print(objective_list);
 	if objective_list.is_empty():
 		start_mode = false;
 		new_objectives();
@@ -99,5 +98,5 @@ func start() -> void:
 		start_mode = true;
 		set_objectives();
 	
-	if abs(point_objective.x-node_parent.position.x) <= 10 and abs(point_objective.y-node_parent.position.y) <= 10:
+	elif abs(point_objective.x-node_parent.position.x) <= 10 and abs(point_objective.y-node_parent.position.y) <= 10:
 		set_objectives();
