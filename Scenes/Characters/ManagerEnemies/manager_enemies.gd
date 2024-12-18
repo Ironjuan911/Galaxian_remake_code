@@ -28,7 +28,6 @@ var i = 0;
 func _ready_timer() -> void:
 	if i >= available_zones:
 		timer_ready.autostart = false;
-		#await get_tree().create_timer(2.0).timeout;
 		await get_tree().process_frame;
 		timer_game.paused = false;
 	else:
@@ -37,5 +36,8 @@ func _ready_timer() -> void:
 
 
 func _process_timer() -> void:
-	print("true")
-	enemy_list[get_random_zone_enemy()].AI.start();
+	var id_zone = get_random_zone_enemy();
+	if enemy_list[id_zone]:
+		enemy_list[id_zone].AI.start();
+	else:
+		enemy_list[id_zone] = new_enemy(id_zone);

@@ -1,5 +1,7 @@
 extends Node;
 
+var bullet_data :PackedScene = preload("res://Scenes/Characters/bullets/bullet.tscn");
+
 const meter : int = 8;
 const base_resolution_center_viewport : Vector2 = Vector2(460 , 649);
 var rng : RandomNumberGenerator = RandomNumberGenerator.new();
@@ -28,3 +30,12 @@ func create_random_number2(min_number : float, max_number : float) -> float:
 func create_random_number1(number : int) -> int:
 	rng.randomize();
 	return rng.randi() % number + 1
+	
+func create_bullet(color:int,up_mode:bool,focus_player:bool,focus_enemy:bool) -> Bullet:
+	var bullet : Bullet = bullet_data.instantiate();
+	bullet.color_type = color;
+	bullet.up_direction_ = up_mode;
+	bullet.focused["player"] = focus_player;
+	bullet.focused["enemy"] = focus_enemy;
+	
+	return bullet;

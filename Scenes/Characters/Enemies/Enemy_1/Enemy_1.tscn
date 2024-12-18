@@ -1,18 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqwys1y2grnq4"]
+[gd_scene load_steps=6 format=3 uid="uid://bqwys1y2grnq4"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_fvt50"]
 [ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_3fs6e"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/admin_states_enemy.gd" id="2_7udc6"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_dih1c"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_1/ai_enemy_1.gd" id="4_wv25n"]
 
 [node name="Enemy1" type="CharacterBody2D"]
-position = Vector2(0, 125)
 script = ExtResource("1_fvt50")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-0.5, 0)
-texture = ExtResource("2_3fs6e")
-hframes = 13
+[node name="Admin_States" type="Node" parent="."]
+script = ExtResource("2_7udc6")
+
+[node name="AI_Enemy" type="Node" parent="."]
+script = ExtResource("4_wv25n")
+
+[node name="TimerAttack" type="Timer" parent="AI_Enemy"]
+wait_time = 5.0
+
+[node name="FirstAttack" type="Timer" parent="AI_Enemy"]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [node name="States" type="Node2D" parent="."]
 
@@ -21,10 +30,17 @@ hframes = 13
 [node name="movement" type="Node2D" parent="States" groups=["movement"]]
 script = ExtResource("3_dih1c")
 
+[node name="dash_mode" type="Node2D" parent="States" groups=["dash_mode"]]
+
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 
-[node name="AI_Enemy" type="Node" parent="."]
-script = ExtResource("4_wv25n")
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 0)
+texture = ExtResource("2_3fs6e")
+hframes = 13
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -26)
+
+[connection signal="timeout" from="AI_Enemy/TimerAttack" to="AI_Enemy" method="_call_attack"]
+[connection signal="timeout" from="AI_Enemy/FirstAttack" to="AI_Enemy" method="_can_attack"]

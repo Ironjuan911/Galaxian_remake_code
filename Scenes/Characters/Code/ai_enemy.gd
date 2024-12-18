@@ -3,7 +3,7 @@ class_name AI_Enemy;
 
 @export var right_zone : bool = true;
 
-@onready var node_parent : Node2D= $"..";
+@onready var node_parent : Character = $"..";
 
 const speed_direction : float = 0.5;
 var direction : Vector2;
@@ -19,6 +19,8 @@ var point_objective : Vector2 = point_reference;
 	GlobalVariables.base_resolution_center_viewport.y/4 -10
 )
 
+var can_attack : bool = false;
+
 func _new_ready() -> void:
 	pass;
 
@@ -26,7 +28,14 @@ func _new_process(delta : float) -> void:
 	pass;
 	
 func _ready() -> void:
+	if node_parent.global_position.x >= 0:
+		right_zone = true;
+	else:
+		right_zone = false;
 	_new_ready();
+	new_objectives();
+	
+	
 
 func _physics_process(delta: float) -> void:
 	set_direction();
@@ -35,6 +44,7 @@ func _physics_process(delta: float) -> void:
 	_new_process(delta);
 	if start_mode:
 		start();
+	
 	
 func set_direction() -> void:
 	var real_direction : Vector2 = get_direction(point_objective);
@@ -100,3 +110,13 @@ func start() -> void:
 	
 	elif abs(point_objective.x-node_parent.position.x) <= 10 and abs(point_objective.y-node_parent.position.y) <= 10:
 		set_objectives();
+
+"""Attack Zone"""
+func _call_attack() -> void:
+	print("can_attack: " + str(can_attack));
+	if can_attack:
+		node_parent.all_state_node["in_game"].attack_mode();
+
+func _can_attack() -> void:
+	can_attack = true;
+	pass;

@@ -78,7 +78,7 @@ position = Vector2(8, 30)
 position = Vector2(23, 30)
 
 [node name="TimerReady" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.5
 autostart = true
 
 [node name="TimerGame" type="Timer" parent="."]

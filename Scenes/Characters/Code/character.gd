@@ -1,7 +1,7 @@
 extends CharacterBody2D;
 class_name Character;
 
-@onready var admin_states: Admin_states_player = $Admin_States;
+@onready var admin_states: Node = $Admin_States;
 
 var states: Dictionary = { #Indica los estados posibles para el jugador
 	"in_game":true,"movement":true,
@@ -27,7 +27,8 @@ func _physics_process(delta: float) -> void:
 	var Delta = delta*58.86; ## un delta que no afecta el movimiento si es que olvidas ponerlo
 	
 	for state in available_states_node:
-		state.local_physics_process(Delta);
+		if state.has_method("local_physics_process"):
+			state.local_physics_process(Delta);
 	
 	move_and_slide();
 	
@@ -43,11 +44,11 @@ func set_available_states() -> Array[Node2D]: ## Funcion que retorna los nodos d
 		if states[node_name]:
 			output_array.resize(output_array.size()+1); #Ampliar el espacio del array en 1
 			output_array[i] = all_state_node[node_name]; # si se encuentra en true, añadirlo al output
-			print(output_array);
+			
 			i += 1;
 			
 			#LLamar funcion activate, a cada nodo que se añada al output
 			if all_state_node[node_name].has_method("activated"):
 				all_state_node[node_name].activated();
-	
+	print(output_array);
 	return output_array;

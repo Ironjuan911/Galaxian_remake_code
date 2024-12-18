@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://rgmyvohdjscp"]
 
-[ext_resource type="Script" path="res://Scenes/Characters/Code/player.gd" id="1_3vesu"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/admin_states.gd" id="2_tckwa"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/movement.gd" id="3_lj4le"]
