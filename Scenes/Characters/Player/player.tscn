@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://rgmyvohdjscp"]
+[gd_scene load_steps=10 format=3 uid="uid://rgmyvohdjscp"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
-[ext_resource type="Script" path="res://Scenes/Characters/Player/admin_states.gd" id="2_tckwa"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/admin_states_player.gd" id="2_tckwa"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/movement.gd" id="3_lj4le"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/in_game.gd" id="4_r8evb"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dash_mode.gd" id="5_jqcqq"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dead.gd" id="6_8kvke"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="6_rnur7"]
 
 [sub_resource type="Curve" id="Curve_wfwke"]
 min_value = -360.0
@@ -87,6 +88,12 @@ one_shot = true
 [node name="Timer_particle" type="Timer" parent="States/dash_mode"]
 wait_time = 0.025
 
+[node name="hit" type="Node2D" parent="States" groups=["hit"]]
+script = ExtResource("6_rnur7")
+
+[node name="TimerHit" type="Timer" parent="States/hit"]
+one_shot = true
+
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 script = ExtResource("6_8kvke")
 
@@ -101,3 +108,4 @@ polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2,
 
 [connection signal="timeout" from="States/dash_mode/Timer_state" to="States/dash_mode" method="_on_timer_state_timeout"]
 [connection signal="timeout" from="States/dash_mode/Timer_particle" to="States/dash_mode" method="_on_timer_particle_timeout"]
+[connection signal="timeout" from="States/hit/TimerHit" to="States/hit" method="_hit_timeout"]

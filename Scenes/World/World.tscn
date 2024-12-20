@@ -52,10 +52,10 @@ shape = SubResource("SegmentShape2D_0mnyr")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, -200)
-amount = 30
-lifetime = 1.8
+amount = 15
+lifetime = 0.9
 preprocess = 3.0
-speed_scale = 0.6
+speed_scale = 0.4
 randomness = 1.0
 emission_shape = 3
 emission_rect_extents = Vector2(115, 1)

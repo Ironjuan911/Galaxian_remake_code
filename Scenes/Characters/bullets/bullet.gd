@@ -34,17 +34,24 @@ func _physics_process(delta: float) -> void:
 	if not impact:
 		velocity.y = speed*meter*delta*direction;
 		move_and_slide();
+	checkDelete();
 
 
 func _impact_character(body: Node2D) -> void:
 	if (focused["player"]):
 		if body is Player:
 			impact = true;
+			body.admin_states.hit();
 			queue_free();
-			pass;
+
+
 	
 	if (focused["enemy"]):
 		if body is Enemy:
 			impact = true;
+			body.admin_states.hit();
 			queue_free();
-			pass;
+
+func checkDelete() -> void:
+	if GlobalVariables.in_world(global_position):
+		queue_free();

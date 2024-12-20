@@ -12,7 +12,6 @@ func get_vector(arrival_point:Vector2, exit_point:Vector2) -> Vector2: #Adquiere
 	var vector = unit_vector/lambda;
 	return vector;
 
-
 func order_vectors_in_x(Input_array : Array[Vector2]) -> Array[Vector2]:
 	for i in range(Input_array.size()):
 		for j in range(0, Input_array.size() - i - 1):
@@ -39,3 +38,6 @@ func create_bullet(color:int,up_mode:bool,focus_player:bool,focus_enemy:bool) ->
 	bullet.focused["enemy"] = focus_enemy;
 	
 	return bullet;
+
+func in_world(_position : Vector2) -> bool:
+	return abs(_position.x) >= base_resolution_center_viewport.x/2 or abs(_position.y) >= base_resolution_center_viewport.y/2;

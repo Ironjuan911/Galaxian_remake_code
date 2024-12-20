@@ -4,7 +4,7 @@ class_name Character;
 @onready var admin_states: Node = $Admin_States;
 
 var states: Dictionary = { #Indica los estados posibles para el jugador
-	"in_game":true,"movement":true,
+	"in_game":true,"movement":true,"hit":false,
 	"dead":false
 	};
 	
@@ -24,11 +24,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	var Delta = delta*58.86; ## un delta que no afecta el movimiento si es que olvidas ponerlo
+	delta = delta*58.86; ## un delta que no afecta el movimiento si es que olvidas ponerlo
 	
 	for state in available_states_node:
 		if state.has_method("local_physics_process"):
-			state.local_physics_process(Delta);
+			state.local_physics_process(delta);
 	
 	move_and_slide();
 	

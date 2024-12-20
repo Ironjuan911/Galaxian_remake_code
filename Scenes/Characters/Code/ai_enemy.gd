@@ -113,7 +113,6 @@ func start() -> void:
 
 """Attack Zone"""
 func _call_attack() -> void:
-	print("can_attack: " + str(can_attack));
 	if can_attack:
 		node_parent.all_state_node["in_game"].attack_mode();
 

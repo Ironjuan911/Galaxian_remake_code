@@ -5,7 +5,7 @@ class_name Enemy;
 
 func extend_ready() -> void:
 	states = { #Indica los estados posibles para el jugador
-	"in_game":true,"movement":true,"dash_mode":false,
+	"in_game":true,"movement":true,"dash_mode":false,"hit":false,
 	"dead":false
 	}
 
