@@ -12,7 +12,7 @@ var states: Dictionary = { #Indica los estados posibles para el jugador
 @onready var character : Character = $"..";
 
 func save_states() -> void:
-	character.available_states_node = character.set_available_states();
+	character.available_states_node = character.set_available_states(character.available_states_node);
 
 """
 Estado in_game

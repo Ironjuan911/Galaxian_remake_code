@@ -12,7 +12,7 @@ var meter = GlobalVariables.meter;
 var enabled : bool = false;
 var dash_direction : Vector2; 
 
-func activated() -> void:
+func start_state() -> void:
 	dash_direction = player.all_state_node["in_game"].direction;
 	dash_direction = Vector2(
 		round(dash_direction.x),
@@ -36,9 +36,15 @@ func dash_movement(delta:float) -> void:
 		player.velocity = dash_speed*meter*dash_direction*1.3*delta;
 
 func _on_timer_state_timeout() -> void:
+	if enabled:
+		end_state();
+		player.admin_states.movement();
+
+func end_state() -> void:
 	enabled = false;
 	timer_particle.is_stopped();
-	player.admin_states.movement();
+	timer_state.is_stopped();
+	
 	
 
 func _on_timer_particle_timeout() -> void:

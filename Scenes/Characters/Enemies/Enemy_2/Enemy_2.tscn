@@ -1,14 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://cov2nik73ytxq"]
+[gd_scene load_steps=9 format=3 uid="uid://cov2nik73ytxq"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_na1y5"]
 [ext_resource type="Texture2D" uid="uid://ci8nn2e3fj2fl" path="res://Sprites/Enemies/Enemy_2.png" id="2_hdosh"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/admin_states_enemy.gd" id="2_olq5r"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_ar3n0"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/in_game.gd" id="3_k3lbn"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_2/ai_enemy_2.gd" id="4_qikc4"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="5_vf7kl"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrjaw"]
+size = Vector2(10, 7)
+
 [node name="Enemy2" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_na1y5")
+
+[node name="Admin_States" type="Node" parent="."]
+script = ExtResource("2_olq5r")
 
 [node name="AI_Enemy" type="Node" parent="."]
 script = ExtResource("4_qikc4")
@@ -47,6 +56,10 @@ hframes = 4
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_lrjaw")
 
 [connection signal="timeout" from="AI_Enemy/TimerAttack" to="AI_Enemy" method="_call_attack"]
 [connection signal="timeout" from="AI_Enemy/FirstAttack" to="AI_Enemy" method="_can_attack"]

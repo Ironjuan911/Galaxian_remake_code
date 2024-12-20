@@ -39,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 Input_received = "ui_dash"
 
-[node name="Button jump" parent="." groups=["Scaleable_node"] instance=ExtResource("2_y61nm")]
+[node name="Button attack" parent="." groups=["Scaleable_node"] instance=ExtResource("2_y61nm")]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
@@ -52,6 +52,7 @@ offset_right = -0.456055
 offset_bottom = -1.04797
 grow_horizontal = 0
 grow_vertical = 0
+Input_received = "ui_attack"
 metadata/_edit_use_anchors_ = true
 
 [node name="Scale control nodes" parent="." instance=ExtResource("3_uvqdq")]

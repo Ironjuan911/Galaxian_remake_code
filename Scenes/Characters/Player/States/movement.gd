@@ -1,7 +1,6 @@
 extends Node;
 
-var direction_x : float;
-var direction_y : float;
+var direction : Vector2;
 
 const meter : int  = GlobalVariables.meter;
 var speed : int = 15;
@@ -9,10 +8,9 @@ var speed : int = 15;
 @onready var player: Player = $"../..";
 
 func local_physics_process(delta: float) -> void:
-	direction_x = Input.get_axis("ui_left","ui_right"); #Definimos las direcciones
-	direction_y = Input.get_axis("ui_down","ui_up");
+	direction = Input.get_vector("ui_left","ui_right","ui_down","ui_up")
 	
-	if (direction_x != 0 or direction_y != 0):
+	if (direction.x != 0 or direction.y != 0):
 		general_movement(delta);
 	else:
 		idle_movement(delta);
@@ -21,8 +19,8 @@ func local_physics_process(delta: float) -> void:
 
 func general_movement(delta: float) -> void:
 	
-	player.velocity.x = lerp(player.velocity.x,meter*speed*delta*direction_x,0.05);
-	player.velocity.y = lerp(player.velocity.y,-meter*speed*delta*direction_y,0.05);
+	player.velocity.x = lerp(player.velocity.x,meter*speed*delta*direction.x,0.05);
+	player.velocity.y = lerp(player.velocity.y,-meter*speed*delta*direction.y,0.05);
 	
 func idle_movement(delta: float) -> void:
 	player.velocity.x = lerp(player.velocity.x,0.0,0.1);

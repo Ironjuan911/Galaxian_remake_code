@@ -13,14 +13,20 @@ var directionHit : Vector2;
 func _ready() -> void:
 	timer_hit.wait_time = time_hit;
 
-func activated() -> void:
+func start_state() -> void:
+	character.velocity = lerp(character.velocity,directionHit*meter*impactSpeed,0.8);
+	character.rotation_degrees = -30;
 	timer_hit.start();
 
 func local_physics_process(delta) -> void:
-	
-	character.velocity = lerp(character.velocity,directionHit*meter*impactSpeed*delta,0.8);
-	pass;
+	character.rotation_degrees = lerp(character.rotation_degrees,0.0,0.3*delta);
+
+
+func end_state() -> void:
+	timer_hit.is_stopped();
+	character.rotation_degrees = 0;
 
 
 func _hit_timeout() -> void:
+	end_state();
 	character.admin_states.movement();

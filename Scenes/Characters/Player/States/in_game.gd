@@ -6,6 +6,7 @@ const index_lerp_direction : float = 0.9;
 
 var direction : Vector2;
 var lerp_direction : Vector2;
+var enabled : bool;
 
 @onready var all_particles : Array[CPUParticles2D] = [$ParticlesLeft,$ParticlesCenter,$ParticlesRight];
 @onready var player: Player = $"../..";
@@ -15,12 +16,11 @@ func _ready() -> void:
 		node_particle.set_meta("real_gravity",node_particle.gravity);
 	pass;
 
+func start_state() -> void:
+	enabled = true;
+
 func local_physics_process(delta: float) -> void:
-	check_dash_mode();
-	direction = Vector2(
-		Input.get_axis("ui_left","ui_right"),
-		Input.get_axis("ui_down","ui_up")
-	);
+	direction = Input.get_vector("ui_left","ui_right","ui_down","ui_up");
 	
 	lerp_direction = Vector2(
 		lerp (lerp_direction.x,direction.x,index_lerp_direction),
@@ -29,12 +29,21 @@ func local_physics_process(delta: float) -> void:
 	_SetGravityParticles(lerp_direction,delta);
 	pass;
 
+func end_state() -> void:
+	enabled = false;
+
 func _SetGravityParticles(local_direction : Vector2,delta:float) -> void:
 	local_direction.x = -local_direction.x/10; 
 	#local_direction.x = 0;
 	for node_particle in all_particles:
 		node_particle.gravity = node_particle.get_meta("real_gravity") + local_direction*delta_gravity*delta;
 	
-func check_dash_mode() -> void:
-	if Input.is_action_just_pressed("ui_dash"):
+
+func _input(event: InputEvent) -> void:
+	if enabled and event.is_action_pressed("ui_attack"):
+		var bullet : Bullet = GlobalVariables.create_bullet(1,true,false,true);
+		get_parent().get_parent().add_sibling(bullet);
+		bullet.position = get_parent().get_parent().position;
+
+	if enabled and event.is_action_pressed("ui_dash"):
 		player.admin_states.dash_mode();

@@ -20,7 +20,7 @@ func _ready() -> void:
 	for name_state in states: #Se añaden los nodos de estados al array :D
 		all_state_node[name_state] = get_state_node(name_state);
 		i += 1;
-	available_states_node = set_available_states();
+	available_states_node = set_available_states(available_states_node);
 
 
 func _physics_process(delta: float) -> void:
@@ -36,7 +36,7 @@ func get_state_node(node_name) -> Node: # Funcion que debe de ser reescrita en p
 	var stateNode;
 	return stateNode;
 
-func set_available_states() -> Array[Node2D]: ## Funcion que retorna los nodos de los estados que se encuentran en true en un array :D
+func set_available_states(old_array : Array[Node2D]) -> Array[Node2D]: ## Funcion que retorna los nodos de los estados que se encuentran en true en un array :D
 	var output_array : Array[Node2D];
 	output_array.resize(0);
 	var i = 0;
@@ -48,7 +48,15 @@ func set_available_states() -> Array[Node2D]: ## Funcion que retorna los nodos d
 			i += 1;
 			
 			#LLamar funcion activate, a cada nodo que se añada al output
-			if all_state_node[node_name].has_method("activated"):
-				all_state_node[node_name].activated();
-	print(output_array);
+			if all_state_node[node_name].has_method("start_state"):
+				all_state_node[node_name].start_state();
+				
+	end_states(old_array,output_array);
 	return output_array;
+
+func end_states(old_array : Array[Node2D], new_array : Array[Node2D]) -> void:
+	print(new_array);
+	for NodeState : Node in old_array:
+		if !(NodeState in new_array) and NodeState.has_method("end_state"):
+			print("End state: " + str(NodeState));
+			NodeState.end_state();
