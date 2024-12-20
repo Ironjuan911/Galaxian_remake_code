@@ -47,7 +47,7 @@ func dash_mode() -> void:
 
 func hit() -> void:
 	character.states["in_game"] = true;
-	character.states["movement"] = false;
+	character.states["movement"] = true;
 	character.states["dash_mode"] = false;
 	character.states["hit"] = true;
 	

@@ -78,6 +78,12 @@ color = Color(0.905717, 0.514887, 0.278889, 1)
 [node name="movement" type="Node2D" parent="States" groups=["movement"]]
 script = ExtResource("3_lj4le")
 
+[node name="hit" type="Node2D" parent="States" groups=["hit"]]
+script = ExtResource("6_rnur7")
+
+[node name="TimerHit" type="Timer" parent="States/hit"]
+one_shot = true
+
 [node name="dash_mode" type="Node2D" parent="States" groups=["dash_mode"]]
 script = ExtResource("5_jqcqq")
 
@@ -87,12 +93,6 @@ one_shot = true
 
 [node name="Timer_particle" type="Timer" parent="States/dash_mode"]
 wait_time = 0.025
-
-[node name="hit" type="Node2D" parent="States" groups=["hit"]]
-script = ExtResource("6_rnur7")
-
-[node name="TimerHit" type="Timer" parent="States/hit"]
-one_shot = true
 
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 script = ExtResource("6_8kvke")
@@ -106,6 +106,6 @@ hframes = 5
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2, 6, -4, 4, -4, 4, -6, 1, -9, -1, -9, -4, -6, -4, -4, -6, -4, -7, -2, -7, 7)
 
+[connection signal="timeout" from="States/hit/TimerHit" to="States/hit" method="_hit_timeout"]
 [connection signal="timeout" from="States/dash_mode/Timer_state" to="States/dash_mode" method="_on_timer_state_timeout"]
 [connection signal="timeout" from="States/dash_mode/Timer_particle" to="States/dash_mode" method="_on_timer_particle_timeout"]
-[connection signal="timeout" from="States/hit/TimerHit" to="States/hit" method="_hit_timeout"]

@@ -41,14 +41,15 @@ func _impact_character(body: Node2D) -> void:
 	if (focused["player"]):
 		if body is Player:
 			impact = true;
+			body.all_state_node["hit"].directionHit = Vector2(0,direction);
 			body.admin_states.hit();
 			queue_free();
 
 
-	
 	if (focused["enemy"]):
 		if body is Enemy:
 			impact = true;
+			body.all_state_node["hit"].directionHit = Vector2(0,direction);
 			body.admin_states.hit();
 			queue_free();
 

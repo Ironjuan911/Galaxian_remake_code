@@ -12,14 +12,14 @@ func get_vector(arrival_point:Vector2, exit_point:Vector2) -> Vector2: #Adquiere
 	var vector = unit_vector/lambda;
 	return vector;
 
-func order_vectors_in_x(Input_array : Array[Vector2]) -> Array[Vector2]:
-	for i in range(Input_array.size()):
-		for j in range(0, Input_array.size() - i - 1):
-			if Input_array[j].x > Input_array[j + 1].x:
-				var temp = Input_array[j]
-				Input_array[j] = Input_array[j + 1]
-				Input_array[j + 1] = temp
-	return Input_array;
+func order_vectors_in_x(array : Array[Vector2]) -> Array[Vector2]:
+	for i in range(array.size()):
+		for j in range(0, array.size() - i - 1):
+			if array[j].x > array[j + 1].x:
+				var temp = array[j]
+				array[j] = array[j + 1]
+				array[j + 1] = temp
+	return array;
 
 func create_random_number2(min_number : float, max_number : float) -> float:
 	rng.randomize();
