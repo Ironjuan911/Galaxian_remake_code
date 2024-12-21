@@ -2,6 +2,7 @@ extends CharacterBody2D;
 class_name Character;
 
 @onready var admin_states: Node = $Admin_States;
+@onready var sprite: Sprite2D = $Sprite
 
 var states: Dictionary = { #Indica los estados posibles para el jugador
 	"in_game":true,"movement":true,"hit":false,

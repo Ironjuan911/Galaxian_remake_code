@@ -10,21 +10,30 @@ var impactSpeed : int = 15;
 var deltaVelocity : Vector2;
 var directionHit : Vector2;
 
+var colorSprite : float;
+
 func _ready() -> void:
 	timer_hit.wait_time = time_hit;
 
 func start_state() -> void:
 	character.velocity = lerp(character.velocity,directionHit*meter*impactSpeed,0.8);
 	character.rotation_degrees = -30;
+	character.sprite.material.set("shader_parameter/white",1);
+	colorSprite = character.sprite.material.get("shader_parameter/white");
 	timer_hit.start();
+
 
 func local_physics_process(delta) -> void:
 	character.rotation_degrees = lerp(character.rotation_degrees,0.0,0.3*delta);
+	
+	colorSprite = lerp(colorSprite,0.0,0.2*delta);
+	character.sprite.material.set("shader_parameter/white",colorSprite);
 
 
 func end_state() -> void:
 	timer_hit.is_stopped();
 	character.rotation_degrees = 0;
+	character.sprite.material.set("shader_parameter/white",0);
 
 
 func _hit_timeout() -> void:

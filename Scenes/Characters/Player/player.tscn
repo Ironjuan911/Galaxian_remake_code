@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://rgmyvohdjscp"]
+[gd_scene load_steps=13 format=3 uid="uid://rgmyvohdjscp"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dash_mode.gd" id="5_jqcqq"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dead.gd" id="6_8kvke"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="6_rnur7"]
+[ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="8_tohha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8v75f"]
 
 [sub_resource type="Curve" id="Curve_wfwke"]
 min_value = -360.0
@@ -15,7 +18,13 @@ max_value = 360.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.480556, 131.774), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8hfs"]
+resource_local_to_scene = true
+shader = ExtResource("8_tohha")
+shader_parameter/white = null
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+material = SubResource("ShaderMaterial_8v75f")
 script = ExtResource("1_3vesu")
 
 [node name="Admin_States" type="Node" parent="."]
@@ -99,6 +108,7 @@ script = ExtResource("6_8kvke")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
+material = SubResource("ShaderMaterial_n8hfs")
 position = Vector2(-0.5, 0)
 texture = ExtResource("2_hjygi")
 hframes = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqwys1y2grnq4"]
+[gd_scene load_steps=10 format=3 uid="uid://bqwys1y2grnq4"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_fvt50"]
 [ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_3fs6e"]
@@ -6,6 +6,12 @@
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_dih1c"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_1/ai_enemy_1.gd" id="4_wv25n"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="5_kahsb"]
+[ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="6_nrqv0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xmv70"]
+resource_local_to_scene = true
+shader = ExtResource("6_nrqv0")
+shader_parameter/white = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rljsp"]
 size = Vector2(10, 7)
@@ -47,6 +53,7 @@ one_shot = true
 [node name="dead" type="Node2D" parent="States" groups=["dead"]]
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xmv70")
 position = Vector2(-0.5, 0)
 texture = ExtResource("2_3fs6e")
 hframes = 13
