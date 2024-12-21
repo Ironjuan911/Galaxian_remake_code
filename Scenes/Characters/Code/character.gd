@@ -14,7 +14,7 @@ var available_states_node : Array[Node2D];
 
 func extend_ready():
 	pass;
-
+#AYUDA, no entiendo nada
 func _ready() -> void:
 	extend_ready();
 	var i = 0;
