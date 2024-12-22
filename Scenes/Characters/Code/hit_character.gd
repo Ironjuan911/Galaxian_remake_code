@@ -5,7 +5,8 @@ class_name HitCharacter;
 @onready var character : Character = get_parent().get_parent();
 @onready var timer_hit: Timer = $TimerHit
 @onready var meter : int = GlobalVariables.meter;
-var impactSpeed : int = 15;
+var baseImpactSpeed : int = 15;
+var impactSpeed : int;
 
 var deltaVelocity : Vector2;
 var directionHit : Vector2;
@@ -13,6 +14,7 @@ var directionHit : Vector2;
 var colorSprite : float;
 
 func _ready() -> void:
+	impactSpeed = baseImpactSpeed;
 	timer_hit.wait_time = time_hit;
 
 func start_state() -> void:
@@ -31,6 +33,7 @@ func local_physics_process(delta) -> void:
 
 
 func end_state() -> void:
+	impactSpeed = baseImpactSpeed;
 	timer_hit.is_stopped();
 	character.rotation_degrees = 0;
 	character.sprite.material.set("shader_parameter/white",0);

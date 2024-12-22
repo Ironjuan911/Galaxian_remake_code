@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://rgmyvohdjscp"]
+[gd_scene load_steps=15 format=3 uid="uid://rgmyvohdjscp"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dead.gd" id="6_8kvke"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="6_rnur7"]
 [ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="8_tohha"]
+[ext_resource type="PackedScene" uid="uid://dqq1pdyh8h0jx" path="res://Scenes/Characters/Code/CrashManager/crash_manager.tscn" id="10_3pw8i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8v75f"]
 
@@ -22,6 +23,8 @@ point_count = 3
 resource_local_to_scene = true
 shader = ExtResource("8_tohha")
 shader_parameter/white = null
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iborj"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_8v75f")
@@ -115,6 +118,11 @@ hframes = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2, 6, -4, 4, -4, 4, -6, 1, -9, -1, -9, -4, -6, -4, -4, -6, -4, -7, -2, -7, 7)
+
+[node name="CrashManager" parent="." instance=ExtResource("10_3pw8i")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrashManager"]
+shape = SubResource("CircleShape2D_iborj")
 
 [connection signal="timeout" from="States/hit/TimerHit" to="States/hit" method="_hit_timeout"]
 [connection signal="timeout" from="States/dash_mode/Timer_state" to="States/dash_mode" method="_on_timer_state_timeout"]
