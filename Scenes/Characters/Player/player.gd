@@ -8,6 +8,8 @@ func extend_ready() -> void:
 	"in_game":true,"movement":true,"dash_mode":false,"hit":false,
 	"dead":false
 	}
+	maxHealt = 5;
+	healt = maxHealt
 
 func get_state_node(node_name) -> Node:
 	var stateNodes = get_tree().get_nodes_in_group(node_name);

@@ -1,8 +1,9 @@
 extends CharacterBody2D;
 class_name Character;
 
-@onready var admin_states: Node = $Admin_States;
+@onready var admin_states: Admin_states = $Admin_States;
 @onready var sprite: Sprite2D = $Sprite
+@onready var States: Node2D = $States
 
 var states: Dictionary = { #Indica los estados posibles para el jugador
 	"in_game":true,"movement":true,"hit":false,
@@ -11,6 +12,9 @@ var states: Dictionary = { #Indica los estados posibles para el jugador
 	
 var all_state_node: Dictionary = states.duplicate(); #Contiene los nodos que trata con los diversos estados del jugador (Se añaden en la funcion ready)
 var available_states_node : Array[Node2D];
+
+var maxHealt : float = 3;
+var healt : float = maxHealt;
 
 func extend_ready():
 	pass;
@@ -56,7 +60,8 @@ func set_available_states(old_array : Array[Node2D]) -> Array[Node2D]: ## Funcio
 	return output_array;
 
 func end_states(old_array : Array[Node2D], new_array : Array[Node2D]) -> void:
-	print(new_array);
+	if self is Player:
+		print(new_array);
 	for NodeState : Node in old_array:
 		if !(NodeState in new_array) and NodeState.has_method("end_state"):
 			print("End state: " + str(NodeState));

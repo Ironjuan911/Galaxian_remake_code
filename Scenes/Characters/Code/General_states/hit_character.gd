@@ -5,17 +5,29 @@ class_name HitCharacter;
 @onready var character : Character = get_parent().get_parent();
 @onready var timer_hit: Timer = $TimerHit
 @onready var meter : int = GlobalVariables.meter;
-var impactSpeed : int = 15;
 
-var deltaVelocity : Vector2;
+var baseImpactSpeed : int = 15;
+var impactSpeed : int;
+
+const defaultDamage : int = 1;
+var damage : float = defaultDamage;
+
 var directionHit : Vector2;
-
 var colorSprite : float;
 
 func _ready() -> void:
+	impactSpeed = baseImpactSpeed;
 	timer_hit.wait_time = time_hit;
 
 func start_state() -> void:
+	character.healt = character.healt - damage;
+	if (character.healt <= 0):
+		await get_tree().process_frame;
+		character.admin_states.dead();
+	else:
+		start();
+
+func start() -> void:
 	character.velocity = lerp(character.velocity,directionHit*meter*impactSpeed,0.8);
 	character.rotation_degrees = -30;
 	character.sprite.material.set("shader_parameter/white",1);
@@ -31,6 +43,8 @@ func local_physics_process(delta) -> void:
 
 
 func end_state() -> void:
+	damage = defaultDamage;
+	impactSpeed = baseImpactSpeed;
 	timer_hit.is_stopped();
 	character.rotation_degrees = 0;
 	character.sprite.material.set("shader_parameter/white",0);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://rgmyvohdjscp"]
+[gd_scene load_steps=15 format=3 uid="uid://rgmyvohdjscp"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_3vesu"]
 [ext_resource type="Texture2D" uid="uid://cinp31mtcww1e" path="res://Sprites/Player/Character.png" id="2_hjygi"]
@@ -6,9 +6,10 @@
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/movement.gd" id="3_lj4le"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/in_game.gd" id="4_r8evb"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/dash_mode.gd" id="5_jqcqq"]
-[ext_resource type="Script" path="res://Scenes/Characters/Player/States/dead.gd" id="6_8kvke"]
-[ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="6_rnur7"]
+[ext_resource type="PackedScene" uid="uid://bwfgmy1nvcvr1" path="res://Scenes/Characters/Code/General_states/hit_character.tscn" id="5_yu3bm"]
+[ext_resource type="PackedScene" uid="uid://q2tx3ftoa2le" path="res://Scenes/Characters/Code/General_states/dead_character.tscn" id="7_ouk4l"]
 [ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="8_tohha"]
+[ext_resource type="PackedScene" uid="uid://dqq1pdyh8h0jx" path="res://Scenes/Characters/Code/CrashManager/crash_manager.tscn" id="10_3pw8i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8v75f"]
 
@@ -21,7 +22,9 @@ point_count = 3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n8hfs"]
 resource_local_to_scene = true
 shader = ExtResource("8_tohha")
-shader_parameter/white = null
+shader_parameter/white = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iborj"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 material = SubResource("ShaderMaterial_8v75f")
@@ -87,24 +90,19 @@ color = Color(0.905717, 0.514887, 0.278889, 1)
 [node name="movement" type="Node2D" parent="States" groups=["movement"]]
 script = ExtResource("3_lj4le")
 
-[node name="hit" type="Node2D" parent="States" groups=["hit"]]
-script = ExtResource("6_rnur7")
-
-[node name="TimerHit" type="Timer" parent="States/hit"]
-one_shot = true
+[node name="hit" parent="States" instance=ExtResource("5_yu3bm")]
 
 [node name="dash_mode" type="Node2D" parent="States" groups=["dash_mode"]]
 script = ExtResource("5_jqcqq")
 
 [node name="Timer_state" type="Timer" parent="States/dash_mode"]
-wait_time = 0.167
+wait_time = 0.12
 one_shot = true
 
 [node name="Timer_particle" type="Timer" parent="States/dash_mode"]
 wait_time = 0.025
 
-[node name="dead" type="Node2D" parent="States" groups=["dead"]]
-script = ExtResource("6_8kvke")
+[node name="dead" parent="States" instance=ExtResource("7_ouk4l")]
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
@@ -116,6 +114,10 @@ hframes = 5
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-6, 8, -4, 8, -3, 7, 3, 7, 4, 8, 6, 8, 7, 7, 7, -2, 6, -4, 4, -4, 4, -6, 1, -9, -1, -9, -4, -6, -4, -4, -6, -4, -7, -2, -7, 7)
 
-[connection signal="timeout" from="States/hit/TimerHit" to="States/hit" method="_hit_timeout"]
+[node name="CrashManager" parent="." instance=ExtResource("10_3pw8i")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrashManager"]
+shape = SubResource("CircleShape2D_iborj")
+
 [connection signal="timeout" from="States/dash_mode/Timer_state" to="States/dash_mode" method="_on_timer_state_timeout"]
 [connection signal="timeout" from="States/dash_mode/Timer_particle" to="States/dash_mode" method="_on_timer_particle_timeout"]

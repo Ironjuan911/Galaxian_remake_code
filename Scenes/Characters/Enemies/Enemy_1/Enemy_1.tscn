@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqwys1y2grnq4"]
+[gd_scene load_steps=13 format=3 uid="uid://bqwys1y2grnq4"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_fvt50"]
 [ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_3fs6e"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/admin_states_enemy.gd" id="2_7udc6"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_dih1c"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_1/ai_enemy_1.gd" id="4_wv25n"]
-[ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="5_kahsb"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/General_states/hit_character.gd" id="5_kahsb"]
+[ext_resource type="PackedScene" uid="uid://q2tx3ftoa2le" path="res://Scenes/Characters/Code/General_states/dead_character.tscn" id="6_77kq3"]
 [ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="6_nrqv0"]
+[ext_resource type="PackedScene" uid="uid://dqq1pdyh8h0jx" path="res://Scenes/Characters/Code/CrashManager/crash_manager.tscn" id="8_fi5qc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmv70"]
 resource_local_to_scene = true
@@ -15,6 +17,9 @@ shader_parameter/white = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rljsp"]
 size = Vector2(10, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kit3o"]
+radius = 8.0
 
 [node name="Enemy1" type="CharacterBody2D"]
 collision_layer = 2
@@ -50,7 +55,7 @@ script = ExtResource("5_kahsb")
 [node name="TimerHit" type="Timer" parent="States/hit"]
 one_shot = true
 
-[node name="dead" type="Node2D" parent="States" groups=["dead"]]
+[node name="dead" parent="States" instance=ExtResource("6_77kq3")]
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xmv70")
@@ -64,6 +69,11 @@ target_position = Vector2(0, -26)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_rljsp")
+
+[node name="CrashManager" parent="." instance=ExtResource("8_fi5qc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrashManager"]
+shape = SubResource("CircleShape2D_kit3o")
 
 [connection signal="timeout" from="AI_Enemy/TimerAttack" to="AI_Enemy" method="_call_attack"]
 [connection signal="timeout" from="AI_Enemy/FirstAttack" to="AI_Enemy" method="_can_attack"]

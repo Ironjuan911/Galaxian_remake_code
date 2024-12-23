@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwfgmy1nvcvr1"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/Code/General_states/hit_character.gd" id="1_c73qu"]
+
+[node name="hit" type="Node2D" groups=["hit"]]
+script = ExtResource("1_c73qu")
+
+[node name="TimerHit" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimerHit" to="." method="_hit_timeout"]

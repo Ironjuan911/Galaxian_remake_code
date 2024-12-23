@@ -22,7 +22,7 @@ b = Vector2(-120, 168)
 a = Vector2(120, 168)
 b = Vector2(120, -168)
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["World"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)

@@ -17,6 +17,8 @@ func _ready() -> void:
 	pass;
 
 func start_state() -> void:
+	for node_particle : CPUParticles2D in all_particles:
+		node_particle.emitting = true;
 	enabled = true;
 
 func local_physics_process(delta: float) -> void:
@@ -30,6 +32,8 @@ func local_physics_process(delta: float) -> void:
 	pass;
 
 func end_state() -> void:
+	for node_particle : CPUParticles2D in all_particles:
+		node_particle.emitting = false;
 	enabled = false;
 
 func _SetGravityParticles(local_direction : Vector2,delta:float) -> void:
