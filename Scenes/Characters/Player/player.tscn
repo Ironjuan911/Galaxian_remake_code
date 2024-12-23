@@ -96,7 +96,7 @@ script = ExtResource("3_lj4le")
 script = ExtResource("5_jqcqq")
 
 [node name="Timer_state" type="Timer" parent="States/dash_mode"]
-wait_time = 0.167
+wait_time = 0.12
 one_shot = true
 
 [node name="Timer_particle" type="Timer" parent="States/dash_mode"]

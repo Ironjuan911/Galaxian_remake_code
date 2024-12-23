@@ -41,6 +41,7 @@ func _on_timer_state_timeout() -> void:
 		player.admin_states.movement();
 
 func end_state() -> void:
+	player.velocity = lerp(player.velocity,Vector2(0,0),0.3);
 	enabled = false;
 	timer_particle.is_stopped();
 	timer_state.is_stopped();
