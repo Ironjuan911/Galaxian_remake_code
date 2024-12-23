@@ -37,7 +37,7 @@ func _ready_timer() -> void:
 
 func _process_timer() -> void:
 	var id_zone = get_random_zone_enemy();
-	if enemy_list[id_zone]:
+	if enemy_list[id_zone] != null:
 		enemy_list[id_zone].AI.start();
 	else:
 		enemy_list[id_zone] = new_enemy(id_zone);

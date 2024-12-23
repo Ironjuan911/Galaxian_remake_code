@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://q2tx3ftoa2le"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/Code/General_states/dead_character.gd" id="1_3v445"]
+[ext_resource type="Texture2D" uid="uid://cxn4vbyl35qys" path="res://Sprites/dead_character/dead_player.png" id="2_nv3xt"]
+
+[sub_resource type="Animation" id="Animation_mtps7"]
+resource_name = "Start"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDead:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.233333, 0.333333, 0.533333, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ncfmc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDead:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_argc4"]
+_data = {
+"RESET": SubResource("Animation_ncfmc"),
+"Start": SubResource("Animation_mtps7")
+}
+
+[node name="dead" type="Node2D" groups=["dead"]]
+script = ExtResource("1_3v445")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_argc4")
+}
+
+[node name="SpriteDead" type="Sprite2D" parent="."]
+texture = ExtResource("2_nv3xt")
+hframes = 4

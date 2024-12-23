@@ -1,11 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqq1pdyh8h0jx"]
+[gd_scene load_steps=4 format=3 uid="uid://dqq1pdyh8h0jx"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/CrashManager/crash_manager.gd" id="1_uyndq"]
+
+[sub_resource type="Animation" id="Animation_rk314"]
+resource_name = "Invincibility"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_giap7"]
+_data = {
+"Invincibility": SubResource("Animation_rk314")
+}
 
 [node name="CrashManager" type="Area2D"]
 collision_layer = 16
 collision_mask = 16
 script = ExtResource("1_uyndq")
 
+[node name="CrashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_giap7")
+}
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CrashTimer" to="." method="_canCrash"]

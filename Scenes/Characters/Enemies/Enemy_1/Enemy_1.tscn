@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqwys1y2grnq4"]
+[gd_scene load_steps=13 format=3 uid="uid://bqwys1y2grnq4"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Code/enemy.gd" id="1_fvt50"]
 [ext_resource type="Texture2D" uid="uid://8x7ht47r06ux" path="res://Sprites/Enemies/Enemy_1.png" id="2_3fs6e"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/admin_states_enemy.gd" id="2_7udc6"]
 [ext_resource type="Script" path="res://Scenes/Characters/Code/State_enemies/movement.gd" id="3_dih1c"]
 [ext_resource type="Script" path="res://Scenes/Characters/Enemies/Enemy_1/ai_enemy_1.gd" id="4_wv25n"]
-[ext_resource type="Script" path="res://Scenes/Characters/Code/hit_character.gd" id="5_kahsb"]
+[ext_resource type="Script" path="res://Scenes/Characters/Code/General_states/hit_character.gd" id="5_kahsb"]
+[ext_resource type="PackedScene" uid="uid://q2tx3ftoa2le" path="res://Scenes/Characters/Code/General_states/dead_character.tscn" id="6_77kq3"]
 [ext_resource type="Shader" path="res://Shaders/hit.gdshader" id="6_nrqv0"]
 [ext_resource type="PackedScene" uid="uid://dqq1pdyh8h0jx" path="res://Scenes/Characters/Code/CrashManager/crash_manager.tscn" id="8_fi5qc"]
 
@@ -54,7 +55,7 @@ script = ExtResource("5_kahsb")
 [node name="TimerHit" type="Timer" parent="States/hit"]
 one_shot = true
 
-[node name="dead" type="Node2D" parent="States" groups=["dead"]]
+[node name="dead" parent="States" instance=ExtResource("6_77kq3")]
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xmv70")
