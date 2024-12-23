@@ -1,26 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp5onu6sa07gw"]
+[gd_scene load_steps=3 format=3 uid="uid://bp5onu6sa07gw"]
 
 [ext_resource type="PackedScene" uid="uid://d3kwx4vcawv1v" path="res://Scenes/World/World.tscn" id="1_g0x3b"]
-[ext_resource type="Theme" uid="uid://c4q0in3tia27l" path="res://Resources/theme_2.tres" id="1_i6qs1"]
 [ext_resource type="PackedScene" uid="uid://cqnoxobbih28g" path="res://Scenes/Game/Android_Buttons/touch_controls.tscn" id="4_o8qo7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq7us"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="Theme" id="Theme_ter6h"]
-Panel/styles/panel = SubResource("StyleBoxFlat_mq7us")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwr8g"]
-bg_color = Color(0.266229, 0.717156, 0.876741, 1)
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -32,27 +13,24 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel_back" type="Panel" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_i6qs1")
+color = Color(0.105882, 0.117647, 0.137255, 1)
 
-[node name="Panel_center" type="Panel" parent="."]
-modulate = Color(0.37918, 0.37918, 0.37918, 1)
-self_modulate = Color(0.797659, 0.797658, 0.797659, 1)
+[node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.27
 anchor_right = 0.73
 anchor_bottom = 1.0
-offset_right = -0.284973
-offset_bottom = -0.237976
-theme = SubResource("Theme_ter6h")
-theme_override_styles/panel = SubResource("StyleBoxFlat_gwr8g")
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1.39128e-08, 0.0380599, 0.0225493, 1)
 
 [node name="Center_Viewport" type="SubViewportContainer" parent="."]
 layout_mode = 1
