@@ -21,6 +21,8 @@ func order_vectors_in_x(array : Array[Vector2]) -> Array[Vector2]:
 				array[j + 1] = temp
 	return array;
 
+#Esto es un comentario
+
 func create_random_number2(min_number : float, max_number : float) -> float:
 	rng.randomize();
 	var rd = rng.randf_range(min_number,max_number);
